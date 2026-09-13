@@ -15,21 +15,33 @@ def check_age(age: int):
 def classify_port(port: int):
     try:
         if not isinstance(port, int):
-                return "error: порт должен быть числом"
+            raise TypeError("порт должен быть числом")
         if port < 0:
-            raise ValueError("Порт не может быть отрицательным")
-            result = 100 / port
-    except ValueError as e:
+            raise ValueError("порт не может быть отрицательным")
+    except (ValueError, TypeError) as e:
         print(f"Ошибка: {e}")
-    if port <= 1023:
-        return f"{port} -> well-known"
-    elif port <= 49151:
-        return f"{port} -> registered"
-    elif port <= 65535:
-        return f"{port} -> dynamic/private"
     else:
-        return(f"{port} -> Not Found/Error")
+        if port <= 1023:
+            print(f"{port} -> well-known")
+        elif port <= 49151:
+            print(f"{port} -> registered")
+        else:
+            print(f"{port} -> dynamic/private")
+    finally:
+        print("проверка порта завершена")
 
-port = int(input())
-port_result = classify_port(port)
-print(port_result)
+
+    
+port_input = input("Введи номер порта: ")
+
+try:
+    port = int(port_input)
+    classify_port(port)
+except ValueError as e:
+    if "invalid literal" in str(e):
+        print("Ошибка: нужно ввести число, а не текст")
+    else:
+        print(f"Ошибка: {e}")
+
+
+
