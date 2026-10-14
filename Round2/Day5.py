@@ -1,4 +1,4 @@
-ping_result = {"google.com":40, "pinterest.com":22, "ammit.cc":1337, "namemc.com":67}
+ping_result = {"google.com":40, "pinterest.com":22, "aaac":1337, "namemc.com":67}
 
 def rate_ping(x):
     if x <= 50:
